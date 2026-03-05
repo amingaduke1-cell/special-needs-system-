@@ -1,5 +1,6 @@
 
 
+
 const API_URL = "https://special-needs-backend.onrender.com";
 
 async function loadContacts() {
@@ -95,5 +96,6 @@ function logout() {
   window.location.href = 'login.html';
 
 }
+
 
 loadContacts();

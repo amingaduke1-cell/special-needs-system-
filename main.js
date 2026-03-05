@@ -1,3 +1,4 @@
+
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 const mobileMenu = document.getElementById('mobile-menu');
