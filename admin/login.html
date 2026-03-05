@@ -1,30 +1,60 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="admin.css">
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="admin.css">
+
 </head>
+
 <body>
 
-<h2>Admin Dashboard</h2>
+<div class="dashboard">
 
-<button onclick="logout()">Logout</button>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>🛡 ADMIN</h2>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Support Type</th>
-      <th>Message</th>
-      <th>Date</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody id="contactTable"></tbody>
+    <div class="stats-card">
+        <h3 id="messageCount">0</h3>
+        <p>New Messages</p>
+    </div>
+
+    <button onclick="logout()" class="logout-btn">
+        <i class="bx bx-log-out"></i> Logout
+    </button>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+
+<h2>📩 Messages</h2>
+
+<div class="table-container">
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Type</th>
+<th>Message</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="contactTable"></tbody>
+
 </table>
+</div>
+
+</div>
+</div>
 
 <script src="admin.js"></script>
+
 </body>
 </html>
