@@ -120,58 +120,101 @@
     </section>
 
     <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <div class="contact-info">
-                <span class="badge-small">Get In Touch</span>
-                <h2 style="color: white;">Ready to Help Your <span>Child Thrive?</span></h2>
-                <p style="color: #cbd5e1;">Have questions about adaptive science lessons or need a consultation? I'm here to support your journey.</p>
-                
-                <div class="info-item" style="color: white;">
-                    <div class="info-icon"><i class='bx bxs-envelope'></i></div>
-                    <div>
-                        <h4>Email Me</h4>
-                        <p>amingachristantos@email.com</p>
-                    </div>
-                </div>
+    <div class="contact-container">
 
-                <div class="info-item" style="color: white;">
-                    <div class="info-icon"><i class='bx bxs-phone-call'></i></div>
-                    <div>
-                        <h4>Call or WhatsApp</h4>
-                        <p>+254 790 475362</p>
-                    </div>
-                </div>
+        <!-- CONTACT INFO -->
+        <div class="contact-info">
 
-                <div class="social-links">
-                    <a href="#"><i class='bx bxl-linkedin-square'></i></a>
-                    <a href="#"><i class='bx bxl-facebook-circle'></i></a>
-                    <a href="#"><i class='bx bxl-whatsapp'></i></a>
+            <span class="badge-small">Get In Touch</span>
+
+            <h2 style="color: white;">
+                Ready to Help Your <span>Child Thrive?</span>
+            </h2>
+
+            <p style="color: #cbd5e1;">
+                Have questions about adaptive science lessons or need a consultation?
+                I'm here to support your journey.
+            </p>
+
+            <div class="info-item" style="color: white;">
+                <div class="info-icon">
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div>
+                    <h4>Email Me</h4>
+                    <p>amingachristantos@email.com</p>
                 </div>
             </div>
-            <div class="contact-form">
-                <form action="#">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <select required>
-                            <option value="" disabled selected>Select Support Type</option>
-                            <option value="hi">Hearing Impairment Support</option>
-                            <option value="autism">Autism Friendly Lessons</option>
-                            <option value="science">General Science Tutoring</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Tell me about your child's unique needs..." rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary full-width">Send Message</button>
-                </form>
+
+            <div class="info-item" style="color: white;">
+                <div class="info-icon">
+                    <i class='bx bxs-phone-call'></i>
+                </div>
+                <div>
+                    <h4>Call or WhatsApp</h4>
+                    <p>+254 790 475362</p>
+                </div>
             </div>
+
         </div>
-    </section>
+
+        <!-- CONTACT FORM -->
+        <div class="contact-form">
+
+            <form id="contactForm">
+
+                <div class="form-group">
+                    <input 
+                        type="text"
+                        id="name"
+                        placeholder="Your Name"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Your Email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <select id="supportType" required>
+                        <option value="" disabled selected>
+                            Select Support Type
+                        </option>
+                        <option value="hi">
+                            Hearing Impairment Support
+                        </option>
+                        <option value="autism">
+                            Autism Friendly Lessons
+                        </option>
+                        <option value="science">
+                            General Science Tutoring
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <textarea
+                        id="message"
+                        placeholder="Tell me about your child's unique needs..."
+                        rows="5"
+                        required>
+                    </textarea>
+                </div>
+
+                <button type="submit" class="btn-primary full-width">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
 
     <footer class="main-footer">
         <p>&copy; 2024 Christantos Aminga. Dedicated to Inclusive Education.</p>

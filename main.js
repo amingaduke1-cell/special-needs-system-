@@ -1,30 +1,38 @@
 /* ================================
+   BACKEND URL
+================================ */
+
+const API_URL = "https://special-needs-backend.onrender.com";
+
+/* ================================
    ELEMENTS
 ================================ */
 
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-const mobileMenu = document.getElementById('mobile-menu');
-const navMenu = document.getElementById('nav-menu');
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const mobileMenu = document.getElementById("mobile-menu");
+const navMenu = document.getElementById("nav-menu");
 
 /* ================================
    MOBILE MENU TOGGLE
 ================================ */
 
 if (mobileMenu) {
-    mobileMenu.addEventListener('click', () => {
 
-        navMenu.classList.toggle('active');
+    mobileMenu.addEventListener("click", () => {
 
-        const icon = mobileMenu.querySelector('i');
+        navMenu.classList.toggle("active");
 
-        if (navMenu.classList.contains('active')) {
-            icon.className = 'bx bx-x';
+        const icon = mobileMenu.querySelector("i");
+
+        if (navMenu.classList.contains("active")) {
+            icon.className = "bx bx-x";
         } else {
-            icon.className = 'bx bx-menu';
+            icon.className = "bx bx-menu";
         }
 
     });
+
 }
 
 /* ================================
@@ -33,22 +41,22 @@ if (mobileMenu) {
 
 if (themeToggle) {
 
-    themeToggle.addEventListener('click', () => {
+    themeToggle.addEventListener("click", () => {
 
         const root = document.documentElement;
-        const isDark = root.getAttribute('data-theme') === 'dark';
+        const isDark = root.getAttribute("data-theme") === "dark";
 
         if (isDark) {
 
-            root.setAttribute('data-theme', 'light');
-            themeIcon.className = 'bx bx-moon';
-            localStorage.setItem('theme', 'light');
+            root.setAttribute("data-theme", "light");
+            themeIcon.className = "bx bx-moon";
+            localStorage.setItem("theme", "light");
 
         } else {
 
-            root.setAttribute('data-theme', 'dark');
-            themeIcon.className = 'bx bx-sun';
-            localStorage.setItem('theme', 'dark');
+            root.setAttribute("data-theme", "dark");
+            themeIcon.className = "bx bx-sun";
+            localStorage.setItem("theme", "dark");
 
         }
 
@@ -60,16 +68,16 @@ if (themeToggle) {
    LOAD SAVED THEME
 ================================ */
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
 
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem("theme");
 
-    if (savedTheme === 'dark') {
+    if (savedTheme === "dark") {
 
-        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.setAttribute("data-theme", "dark");
 
         if (themeIcon) {
-            themeIcon.className = 'bx bx-sun';
+            themeIcon.className = "bx bx-sun";
         }
 
     }
@@ -77,18 +85,74 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ================================
-   CLOSE MENU WHEN LINK CLICKED
+   CLOSE MOBILE MENU ON LINK CLICK
 ================================ */
 
-document.querySelectorAll('.nav-links a').forEach(link => {
+document.querySelectorAll(".nav-links a").forEach(link => {
 
-    link.addEventListener('click', () => {
+    link.addEventListener("click", () => {
 
-        navMenu.classList.remove('active');
+        navMenu.classList.remove("active");
 
-        const icon = mobileMenu.querySelector('i');
-        icon.className = 'bx bx-menu';
+        const icon = mobileMenu.querySelector("i");
+        if (icon) icon.className = "bx bx-menu";
 
     });
 
 });
+
+/* ================================
+   CONTACT FORM SUBMISSION
+================================ */
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", async (event) => {
+
+        event.preventDefault(); // ⭐ Prevent page reload
+
+        const name = document.getElementById("name")?.value;
+        const email = document.getElementById("email")?.value;
+        const supportType = document.getElementById("supportType")?.value;
+        const message = document.getElementById("message")?.value;
+
+        try {
+
+            const res = await fetch(`${API_URL}/api/contact`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    supportType,
+                    message
+                })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+
+                alert("Message sent successfully ✅");
+                contactForm.reset();
+
+            } else {
+
+                alert("Failed to send message ❌");
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+            alert("Server error ❌");
+
+        }
+
+    });
+
+}
