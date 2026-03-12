@@ -1,69 +1,51 @@
-const API_URL = "https://special-needs-backend.onrender.com";
+const API_URL = "https://special-needs-backend.onrender.com/api/contact";
+const token = localStorage.getItem("token");
 
-/* Load Messages */
+if(!token) window.location.href="login.html";
+
+const contactTable = document.getElementById("contactTable");
+const messageCount = document.getElementById("messageCount");
 
 async function loadContacts(){
+    try{
+        const res = await fetch(API_URL, { headers:{ Authorization:`Bearer ${token}` } });
+        const data = await res.json();
 
-    const token = localStorage.getItem("token");
+        contactTable.innerHTML="";
+        messageCount.innerText = data.data.length;
 
-    if(!token){
-        window.location.href="login.html";
-        return;
+        data.data.forEach(contact=>{
+            const id = contact.id;
+            contactTable.innerHTML += `
+                <tr>
+                    <td>${contact.name}</td>
+                    <td>${contact.email}</td>
+                    <td>${contact.supportType || "-"}</td>
+                    <td>${contact.message}</td>
+                    <td>${new Date(contact.createdAt).toLocaleString()}</td>
+                    <td><button class="delete-btn" onclick="deleteContact(${id})">Delete</button></td>
+                </tr>
+            `;
+        });
+    }catch(err){
+        alert("Server error ❌");
+        console.error(err);
     }
-
-    const res = await fetch(`${API_URL}/api/contact`,{
-        headers:{
-            Authorization:`Bearer ${token}`
-        }
-    });
-
-    const data = await res.json();
-
-    const table = document.getElementById("contactTable");
-    const counter = document.getElementById("messageCount");
-
-    table.innerHTML="";
-
-    counter.innerText = data.data.length;
-
-    data.data.forEach(contact=>{
-
-        const id = contact.id || contact._id;
-
-        table.innerHTML += `
-        <tr>
-            <td>${contact.name}</td>
-            <td>${contact.email}</td>
-            <td>${contact.supportType}</td>
-            <td>${contact.message}</td>
-            <td>${new Date(contact.createdAt).toLocaleString()}</td>
-            <td>
-                <button onclick="deleteContact('${id}')">
-                Delete
-                </button>
-            </td>
-        </tr>
-        `;
-    });
 }
-
-/* Delete Message */
 
 async function deleteContact(id){
+    if(!confirm("Are you sure?")) return;
 
-    const token = localStorage.getItem("token");
-
-    await fetch(`${API_URL}/api/contact/${id}`,{
-        method:"DELETE",
-        headers:{
-            Authorization:`Bearer ${token}`
-        }
-    });
-
-    loadContacts();
+    try{
+        const res = await fetch(`${API_URL}/${id}`, { method:"DELETE", headers:{ Authorization:`Bearer ${token}` } });
+        const data = await res.json();
+        if(data.success) loadContacts();
+        else alert("Failed to delete ❌");
+    }catch(err){
+        alert("Server error ❌");
+        console.error(err);
+    }
 }
-
-/* Logout */
 
 function logout(){
     localStorage.removeItem("token");
